@@ -1,0 +1,25 @@
+from python_code import luis
+import matplotlib.pyplot as plt
+from PIL import Image
+import os
+%matplotlib inline
+
+try:
+    # Set up API configuration
+    luis_app_id = 'YOUR_LU_APP_ID'
+    luis_key = 'YOUR_LU_KEY'
+    luis_endpoint = 'YOUR_LU_ENDPOINT'
+
+    # prompt for a command
+    command = input('Please enter a command: \n')
+
+    # get the predicted intent and entity (code in python_code.home_auto.py)
+    action = luis.get_intent(luis_app_id, luis_key, luis_endpoint, command)
+
+    # display an appropriate image
+    img_name = action + '.jpg'
+    img = Image.open(os.path.join("data", "luis" ,img_name))
+    plt.axis('off')
+    plt. imshow(img)
+except Exception as ex:
+    print(ex)
